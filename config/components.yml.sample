@@ -3,13 +3,23 @@
   :ActiveMQ:
     :tag:      "amq"
     :category: "messaging"
+    :versions:
+      - "6.0.0"
   :PostgreSQL:
     :tag:      "calldb"
     :category: "db"
+    :versions:
+      - "8.1.11"
+      - "9.2.1"
 :Web:
   :JBoss:
     :tag:      "jboss"
     :category: "web-container"
+    :versions:
+      - "5_0_1_cr2"
   :Tomcat:
     :tag:      "tomcat"
     :category: "web-container"
+    :versions:
+      - "7.0.32"
+      - "7.0.54"

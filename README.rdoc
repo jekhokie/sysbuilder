@@ -29,9 +29,13 @@ be configured within the <CATEGORY> field
      :<COMPONENT_NAME>:
        :tag:      "<COMPONENT_TAG>"
        :category: "<CATEGORY_TAG>"
+       :versions:
+         - "<VERSION>"
+         - "<VERSION>"
 
 Where:
 - <COMPONENT_CATEGORY>: Name of the group within which this component falls
 - <COMPONENT_NAME>: Actual name of the component that will show up in the web interface
 - <COMPONENT_TAG>: Tag for the component that is used for provisioning scripts to identify the specific component
 - <CATEGORY_TAG>: Category to which this component belongs and can be configured within
+- <VERSION>: Versions of the component that can be auto-provisioned by the provisioning scripts

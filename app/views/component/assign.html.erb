@@ -1,5 +1,13 @@
 <div class="assigned-component" data-tag="<%= @tag %>">
   <%= hidden_field_tag "component_json[#{@category}][#{@instance}]name", @name %>
   <%= hidden_field_tag "component_json[#{@category}][#{@instance}]tag", @tag %>
-  <%= @name %>
+
+  <span class="component-name">
+    <%= @name %>
+  </span>
+
+  <span class="component-version">
+    <%= label_tag  "component_json[#{@category}][#{@instance}]version", "Version:" %>
+    <%= select_tag "component_json[#{@category}][#{@instance}]version", options_for_select(@versions, selected: @versions.last) %>
+  </span>
 </div>

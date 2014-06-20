@@ -4,6 +4,7 @@ class ComponentController < ApplicationController
     @category = params[:category]
     @tag      = params[:tag]
     @instance = params[:instance]
+    @versions = params[:versions].split(",")
 
     render :template => 'component/assign', :formats => [ :html ], :layout => false
   end
