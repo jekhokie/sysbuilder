@@ -1,6 +1,6 @@
 <div id="component-picker-container">
   <div id="component-picker">
-    <h2>Components</h2>
+    <h2 class="component-picker-heading">Components</h2>
 
     <%- @component_list.each do |category, component_list| %>
       <h3 class="list-heading"><%= category %></h3>
@@ -13,10 +13,20 @@
   </div>
 
   <div id="component-container">
-    <h2>Data Center Build Manifest</h2>
+    <h2 class="component-container-heading">Data Center Build Manifest</h2>
+
+    <span class="provider">
+      <%= label_tag  "virt-provider", "Virt. Provider:" %>
+      <%= select_tag "virt-provider",
+                     options_for_select(@compute_providers.keys, selected: @compute_providers.keys[0]),
+                     :id => "provider",
+                     :'data-selected' => @compute_providers.keys[0] %>
+    </span>
 
     <div class="panel panel-default">
       <%= form_tag("/build_summary", method: :post, remote: true, basepath: "/build_summary", id: "dc-build-form") do %>
+        <%= hidden_field_tag "provider", @compute_providers.keys[0] %>
+
         <%- @category_list.each do |category, attrs| %>
           <div class="panel-heading" id="<%= attrs[:category] %>-heading">
             <%= category %>

@@ -1,0 +1,9 @@
+#modal {
+  .modal-body {
+    pre {
+      cursor:     text;
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+  }
+}

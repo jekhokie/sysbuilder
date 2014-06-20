@@ -31,6 +31,27 @@
       margin-left: 40px;
       width:       865px;
 
+      .component-container-heading {
+        display: inline-block;
+        width:   580px;
+      }
+
+      .provider {
+        display:   inline-block;
+        font-size: 22px;
+
+        label {
+          margin-bottom:  0px;
+          margin-right:   8px;
+          vertical-align: bottom;
+        }
+
+        select {
+          margin-top:     5px;
+          vertical-align: top;
+        }
+      }
+
       .panel-heading {
         background-color: #f5f5f5;
         border-top:       1px solid #DDD;
@@ -53,17 +74,23 @@
           padding-left:     15px;
           margin:           6px 12px;
 
-          .component-version {
-            float: right;
+          .component-version,
+          .component-vresource {
+            float:        right;
+            margin-right: 20px;
 
             label {
               font-weight:  normal;
-              margin-right: 12px;
+              margin-right: 8px;
             }
 
             select {
-              min-width: 120px;
+              min-width: 100px;
             }
+          }
+
+          .component-vresource {
+            margin-right: 0px;
           }
         }
       }
@@ -86,12 +113,13 @@
   -moz-border-radius:    3px;
   -webkit-border-radius: 3px;
 
-  background-color: #2D6CA2;
+  background-color: #5BC0DE;
   border:           1px solid black;
   color:            #FFF;
   display:          table-cell;
   font-size:        14px;
   height:           35px;
+  padding-top:      6px;
   text-align:       center;
   vertical-align:   middle;
   width:            180px;

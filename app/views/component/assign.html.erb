@@ -1,13 +1,21 @@
 <div class="assigned-component" data-tag="<%= @tag %>">
-  <%= hidden_field_tag "component_json[#{@category}][#{@instance}]name", @name %>
-  <%= hidden_field_tag "component_json[#{@category}][#{@instance}]tag", @tag %>
+  <%= hidden_field_tag "component_json[manifest][#{@category}][#{@instance}]name", @name %>
+  <%= hidden_field_tag "component_json[manifest][#{@category}][#{@instance}]tag", @tag %>
 
   <span class="component-name">
     <%= @name %>
   </span>
 
+  <span class="component-vresource">
+    <%= label_tag  "component_json[manifest][#{@category}][#{@instance}]vresource", "VResource:" %>
+    <%= select_tag "component_json[manifest][#{@category}][#{@instance}]vresource",
+                   options_for_select(@compute_providers),
+                   :class => 'provider-compute-resources' %>
+  </span>
+
   <span class="component-version">
-    <%= label_tag  "component_json[#{@category}][#{@instance}]version", "Version:" %>
-    <%= select_tag "component_json[#{@category}][#{@instance}]version", options_for_select(@versions, selected: @versions.last) %>
+    <%= label_tag  "component_json[manifest][#{@category}][#{@instance}]version", "Version:" %>
+    <%= select_tag "component_json[manifest][#{@category}][#{@instance}]version",
+                   options_for_select(@versions, selected: @versions.last) %>
   </span>
 </div>

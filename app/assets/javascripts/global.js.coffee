@@ -29,6 +29,7 @@ $(document).ready ->
             tag:      $(ui.draggable).data("tag")
             instance: $("#" + $(this).attr("id").replace("-heading", "-container")).find(".assigned-component").size() + 1
             versions: $(ui.draggable).data("versions")
+            provider: $("#provider").val()
           success: (obj) ->
             # insert the element into the container
             elementId          = $(this).attr("id").replace("-heading", "").concat("-container")

@@ -9,6 +9,7 @@ Once cloning the project, copy the sample files:
 
    cp config/categories.yml.sample config/categories.yml
    cp config/components.yml.sample config/components.yml
+   cp config/compute_providers.yml.sample config/compute_providers.yml
 
 Edit the above copied files for the information specific to your software needs based on the
 following schemas:
@@ -39,3 +40,18 @@ Where:
 - <COMPONENT_TAG>: Tag for the component that is used for provisioning scripts to identify the specific component
 - <CATEGORY_TAG>: Category to which this component belongs and can be configured within
 - <VERSION>: Versions of the component that can be auto-provisioned by the provisioning scripts
+
+- compute_providers.yml
+
+   :<PROVIDER_NAME>:
+     :<COMPUTE_RESOURCE_NAME>:
+       :cpu:  "<COMPUTE_CPUS>"
+       :mem:  "<COMPUTE_MEMORY>"
+       :disk: "<COMPUTE_DISK>"
+
+Where:
+- <PROVIDER_NAME>: Name of the provider that will be interfaced with for creating the virtual instances
+- <COMPUTE_RESOURCE_NAME>: Name of the resource for identification in the UI
+- <COMPUTE_CPUS>: Number of CPUs that the compute resource will contain
+- <COMPUTE_MEMORY>: Amount of memory (in MB) that the compute resource will contain
+- <COMPUTE_DISK>: Amount of disk storage (in GB) that the compute resource will contain
