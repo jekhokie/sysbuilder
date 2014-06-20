@@ -21,12 +21,17 @@ class ComponentController < ApplicationController
   def change_provider
     provider              = params[:provider_name]
     compute_provider_list = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
-
-    unless compute_provider_list.nil?
-      @new_provider_options = compute_provider_list[provider.to_sym]
-    end
+    @new_provider_options = compute_provider_list[provider.to_sym] unless compute_provider_list.nil?
 
     render :template => 'component/change_provider', :formats => [ :html ], :layout => false
+  end
+
+  def get_provider_info
+    @provider_name        = params[:provider_name]
+    compute_provider_list = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
+    @provider_info        = compute_provider_list[@provider_name.to_sym] unless compute_provider_list.nil?
+
+    render :template => 'component/get_provider_info', :formats => [ :html ], :layout => false
   end
 
   def build_summary

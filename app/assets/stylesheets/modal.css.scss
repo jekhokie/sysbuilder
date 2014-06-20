@@ -5,5 +5,14 @@
       max-height: 400px;
       overflow-y: scroll;
     }
+
+    span.provider-info-name {
+      font-style:  italic;
+      font-weight: bold;
+    }
+
+    table.provider-info-table {
+      margin-top: 25px;
+    }
   }
 }

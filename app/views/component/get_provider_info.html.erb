@@ -1,0 +1,24 @@
+<h4>Provider Information for: <span class="provider-info-name"><%= @provider_name %></span></h4>
+
+<table class="table table-bordered provider-info-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <%- @provider_info[@provider_info.keys.first].keys.each do |heading| %>
+        <th><%= heading.to_s.capitalize %></th>
+      <%- end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%- @provider_info.each do |name, attrs| %>
+      <tr>
+        <td><%= name %></td>
+
+        <%- attrs.each do |attr, val| %>
+          <td><%= val %></td>
+        <%- end %>
+      </tr>
+    <%- end %>
+  </tbody>
+</table>

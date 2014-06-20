@@ -33,7 +33,7 @@
 
       .component-container-heading {
         display: inline-block;
-        width:   580px;
+        width:   500px;
       }
 
       .provider {
@@ -49,6 +49,11 @@
         select {
           margin-top:     5px;
           vertical-align: top;
+        }
+
+        button#show-provider-specs {
+          margin-top: -3px;
+          width:      80px;
         }
       }
 

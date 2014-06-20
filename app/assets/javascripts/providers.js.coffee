@@ -27,3 +27,20 @@ $(document).ready ->
             $(value).empty().append $(response)
           $("#dc-build-form").find("input[name='provider']").val $("#provider").val()
       return
+
+  # show information about provider when requested
+  $("#show-provider-specs").click ->
+    $.ajax "/get_provider_info",
+      context: this
+      type:    "POST"
+      data:
+        provider_name: $("#provider").val()
+      success: (response) ->
+        $("#modal .modal-close").html ""
+        $("#modal .modal-title").html "Provider Information"
+        $("#modal .modal-body").html  $(response)
+        $("#modal .modal-footer").html "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"
+        $("#modal").modal
+          backdrop: "static"
+          keyboard: false
+    return

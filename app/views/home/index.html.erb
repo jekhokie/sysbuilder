@@ -21,6 +21,8 @@
                      options_for_select(@compute_providers.keys, selected: @compute_providers.keys[0]),
                      :id => "provider",
                      :'data-selected' => @compute_providers.keys[0] %>
+
+      <button type="button" class="btn btn-primary btn-xs" id="show-provider-specs">Specs</button>
     </span>
 
     <div class="panel panel-default">
