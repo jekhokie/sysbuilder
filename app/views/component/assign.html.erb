@@ -6,6 +6,10 @@
     <%= @name %>
   </span>
 
+  <button class="btn btn-xs btn-danger component-destroy">
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+
   <span class="component-vresource">
     <%= label_tag  "component_json[manifest][#{@category}][#{@instance}]vresource", "VResource:" %>
     <%= select_tag "component_json[manifest][#{@category}][#{@instance}]vresource",

@@ -16,7 +16,7 @@ $(document).ready ->
         if responseType.indexOf('json') > -1
           jsonContent = $("<pre></pre>").html(JSON.stringify(response, undefined, 2))
           $("#modal .modal-close").html "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"
-          $("#modal .modal-title").html  "Datacenter Build"
+          $("#modal .modal-title").html  "Data Center Build Manifest Specification"
           $("#modal .modal-body").html   $(jsonContent)
           $("#modal .modal-footer").html "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"
           $("#modal").modal

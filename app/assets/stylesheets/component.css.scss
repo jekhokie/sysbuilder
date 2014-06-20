@@ -1,3 +1,17 @@
-// Place all the styles related to the component controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.dc-component {
+  border-radius:         3px;
+  -moz-border-radius:    3px;
+  -webkit-border-radius: 3px;
+
+  background-color: #5BC0DE;
+  border:           1px solid black;
+  color:            #FFF;
+  display:          table-cell;
+  font-size:        14px;
+  height:           35px;
+  padding-top:      6px;
+  text-align:       center;
+  vertical-align:   middle;
+  width:            180px;
+  word-wrap:        break-word;
+}
