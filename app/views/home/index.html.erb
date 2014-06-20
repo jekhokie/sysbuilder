@@ -1,0 +1,32 @@
+<div id="component-picker-container">
+  <div id="component-picker">
+    <h2>Components</h2>
+
+    <%- @component_list.each do |category, component_list| %>
+      <h3 class="list-heading"><%= category %></h3>
+      <ul class="list-group">
+        <%- component_list.each do |component, attrs| %>
+          <li class="draggable list-group-item" id="<%= attrs[:category] %>-component" data-tag="<%= attrs[:tag] %>"><%= component %></li>
+        <%- end %>
+      </ul>
+    <%- end %>
+  </div>
+
+  <div id="component-container">
+    <h2>Data Center Build Manifest</h2>
+
+    <div class="panel panel-default">
+      <%= form_tag("/build_summary", method: :post, remote: true, basepath: "/build_summary", id: "dc-build-form") do %>
+        <%- @category_list.each do |category, attrs| %>
+          <%= hidden_field_tag "#{@category}[]", "" %>
+          <div class="panel-heading" id="<%= attrs[:category] %>-heading">
+            <%= category %>
+            <span class="badge component-count">0</span>
+          </div>
+
+          <div class="component-list" id="<%= attrs[:category] %>-container"></div>
+        <%- end %>
+      <%- end %>
+    </div>
+  </div>
+</div>

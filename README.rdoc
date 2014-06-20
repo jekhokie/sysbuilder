@@ -1,0 +1,37 @@
+== SysBuilder
+
+SysBuilder is a virtual data center configuration tool that allows for automatic
+provisioning of a cloud-based data center based on user-selected components.
+
+=== Installation & Configuration
+
+Once cloning the project, copy the sample files:
+
+   cp config/categories.yml.sample config/categories.yml
+   cp config/components.yml.sample config/components.yml
+
+Edit the above copied files for the information specific to your software needs based on the
+following schemas:
+
+- categories.yml
+
+   :<CATEGORY>:
+     :category: "<CATEGORY_TAG>"
+
+Where:
+- <CATEGORY>: Name of the category that will be displayed in the web interface
+- <CATEGORY_TAG>: Tag for the category used internally to decide which components can
+be configured within the <CATEGORY> field
+
+- components.yml
+
+   :<COMPONENT_CATEGORY>:
+     :<COMPONENT_NAME>:
+       :tag:      "<COMPONENT_TAG>"
+       :category: "<CATEGORY_TAG>"
+
+Where:
+- <COMPONENT_CATEGORY>: Name of the group within which this component falls
+- <COMPONENT_NAME>: Actual name of the component that will show up in the web interface
+- <COMPONENT_TAG>: Tag for the component that is used for provisioning scripts to identify the specific component
+- <CATEGORY_TAG>: Category to which this component belongs and can be configured within

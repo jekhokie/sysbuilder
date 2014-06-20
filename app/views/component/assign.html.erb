@@ -1,0 +1,5 @@
+<div class="assigned-component" data-tag="<%= @tag %>">
+  <%= hidden_field_tag "component_json[#{@category}][#{@instance}]name", @name %>
+  <%= hidden_field_tag "component_json[#{@category}][#{@instance}]tag", @tag %>
+  <%= @name %>
+</div>

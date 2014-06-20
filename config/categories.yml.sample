@@ -1,0 +1,7 @@
+---
+:Messaging:
+  :category: "messaging"
+:Database:
+  :category: "db"
+:Web:
+  :category: "web-container"

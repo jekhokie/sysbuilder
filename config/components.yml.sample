@@ -1,0 +1,15 @@
+---
+:Core:
+  :ActiveMQ:
+    :tag:      "amq"
+    :category: "messaging"
+  :PostgreSQL:
+    :tag:      "calldb"
+    :category: "db"
+:Web:
+  :JBoss:
+    :tag:      "jboss"
+    :category: "web-container"
+  :Tomcat:
+    :tag:      "tomcat"
+    :category: "web-container"

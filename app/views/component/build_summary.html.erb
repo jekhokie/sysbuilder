@@ -1,0 +1,25 @@
+<div class="build-summary-container">
+  <h2>Summary:</h2>
+
+  <h3>Human-Readable</h3>
+  <div id="build-summary-human">
+    <ul>
+      <%- unless @component_json.nil? %>
+        <%- @component_json.each do |category, attrs| %>
+          <li><%= category %>:</li>
+          <ul>
+            <li>num_instances:&nbsp;<%= attrs["num_instances"] %></li>
+            <%- unless attrs["instances"].nil? %>
+              <%- attrs["instances"].each do |instance_number, instance_attrs| %>
+                <li><%= instance_number %>:</li>
+                <ul>
+                  <li>type:&nbsp;<%= instance_attrs["type"] %></li>
+                </ul>
+              <%- end %>
+            <%- end %>
+          </ul>
+        <%- end %>
+      <%- end %>
+    </ul>
+  </div>
+</div>
