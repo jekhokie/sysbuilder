@@ -1,0 +1,36 @@
+<div class="manifest-listing-container">
+  <div class="manifest-listing-heading">
+    <h2>Manifest Listing</h2>
+    <p>Below are saved manfiests that can be used to launch a virtual data center.</p>
+  </div>
+
+  <div id="manifest-listing">
+    <%- if @manifests.blank? %>
+      <p class="no-manifest-text">
+        No manifests yet - go ahead and <%= link_to "Create", build_path %> one.
+      </p>
+    <%- else %>
+      <table class="table table-hover" id="manifest-listing">
+        <thead>
+          <tr>
+            <th>Name</tr>
+            <th>Created</th>
+            <th>Last Modified</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%- @manifests.each do |manifest| %>
+            <tr>
+              <td><%= manifest.name %></td>
+              <td><%= manifest.created_at %></td>
+              <td><%= manifest.modified_at %></td>
+              <td></td>
+            </tr>
+          <%- end %>
+        </tbody>
+      <%- end %>
+    </table>
+  </div>
+</div>

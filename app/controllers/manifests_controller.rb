@@ -1,4 +1,8 @@
 class ManifestsController < ApplicationController
+  def explore
+    @manifests = Manifest.all
+  end
+
   def build
     @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
     @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))

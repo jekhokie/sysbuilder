@@ -5,9 +5,11 @@
     </div>
 
     <ul class="nav navbar-nav navbar-left" id="navbar-links">
-      <li><a href="#" data-remote="true">Explore</a></li>
+      <li class="<%= 'active' if controller_name == 'manifests' and action_name == 'explore' %>">
+        <a href="<%= explore_path %>">Explore</a>
+      </li>
       <li class="<%= 'active' if controller_name == 'manifests' and action_name == 'build' %>">
-        <a href="#" data-remote="true">Build</a>
+        <a href="<%= build_path %>">Build</a>
       </li>
       <li><a href="#" data-remote="true">Launch</a></li>
     </ul>

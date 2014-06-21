@@ -1,0 +1,21 @@
+.manifest-listing-container {
+  display: inline-block;
+  width:   100%;
+
+  .manifest-listing-heading {
+    margin-left: 100px;
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  #manifest-listing {
+    font-size:   16px;
+    margin-left: 100px;
+
+    a {
+      font-style: italic;
+    }
+  }
+}
