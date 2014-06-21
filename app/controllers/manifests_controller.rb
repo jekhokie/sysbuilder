@@ -1,4 +1,10 @@
-class ComponentController < ApplicationController
+class ManifestsController < ApplicationController
+  def build
+    @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
+    @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
+    @compute_providers = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
+  end
+
   def assign
     @name              = params[:name]
     @category          = params[:category]
@@ -15,7 +21,7 @@ class ComponentController < ApplicationController
       @compute_providers = compute_provider_list[provider.to_sym]
     end
 
-    render :template => 'component/assign', :formats => [ :html ], :layout => false
+    render :template => 'manifests/assign', :formats => [ :html ], :layout => false
   end
 
   def change_provider
@@ -23,7 +29,7 @@ class ComponentController < ApplicationController
     compute_provider_list = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
     @new_provider_options = compute_provider_list[provider.to_sym] unless compute_provider_list.nil?
 
-    render :template => 'component/change_provider', :formats => [ :html ], :layout => false
+    render :template => 'manifests/change_provider', :formats => [ :html ], :layout => false
   end
 
   def get_provider_info
@@ -31,7 +37,7 @@ class ComponentController < ApplicationController
     compute_provider_list = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
     @provider_info        = compute_provider_list[@provider_name.to_sym] unless compute_provider_list.nil?
 
-    render :template => 'component/get_provider_info', :formats => [ :html ], :layout => false
+    render :template => 'manifests/get_provider_info', :formats => [ :html ], :layout => false
   end
 
   def build_summary

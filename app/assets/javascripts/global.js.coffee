@@ -20,11 +20,11 @@ $(document).ready ->
       activeClass: "ui-state-active"
       hoverClass:  "ui-state-hover"
       drop: (event, ui) ->
-        $.ajax "/assign_component",
+        $.ajax $(ui.draggable).data("path"),
           context: this
           type:    "POST"
           data:
-            name:     $(ui.draggable).text(),
+            name:     $(ui.draggable).text()
             category: $(this).attr("id").replace("-heading", "")
             tag:      $(ui.draggable).data("tag")
             instance: $("#" + $(this).attr("id").replace("-heading", "-container")).find(".assigned-component").size() + 1
