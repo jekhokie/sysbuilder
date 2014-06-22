@@ -6,6 +6,11 @@ buildReady = ->
       helper: (event) ->
         $("<div class='dc-component'><div class='title'>" + $(this).text() + "</div>")
 
+  # change the saved state to "not saved"
+  renderNotSaved = ->
+    $("#manifest-save-state").html "<span class='glyphicon glyphicon-info-sign'></span> Not Saved"
+    $("#manifest-save-state").removeClass("btn-success").addClass("btn-danger")
+
   # build out droppable handling dynamically
   componentArray = []
   $.each $("#component-container").find(".panel-heading"), (index, value) ->
@@ -33,6 +38,9 @@ buildReady = ->
               versions: $(ui.draggable).data("versions")
               provider: $("#provider").val()
             success: (obj) ->
+              # indicate not saved state
+              renderNotSaved()
+
               # insert the element into the container
               elementId          = $(this).attr("id").replace("-heading", "").concat("-container")
               componentContainer = $(this).closest(".panel").find("#" + elementId)
@@ -43,6 +51,16 @@ buildReady = ->
               $(this).find(".component-count").html numComponents
           return
       i++
+
+  # ensure that any time a form input is changed, the manifest is not saved
+  $("select[class='component-version-select'], select[class='provider-compute-resources']").livequery ->
+    $(this).change ->
+      renderNotSaved()
+
+  # ensure that any time a component is removed, the manifest is not saved
+  $("button.component-destroy").livequery ->
+    $(this).click ->
+      renderNotSaved()
 
 # handle turbolinks rails 4 document ready
 $(document).ready(buildReady)

@@ -18,6 +18,10 @@ providersReady = ->
   # catch when the user submits their response to the confirm for changing provider
   $("#confirm-change-provider").livequery ->
     $(this).click ->
+      # indicate not saved state
+      $("#manifest-save-state").html "<span class='glyphicon glyphicon-info-sign'></span> Not Saved"
+      $("#manifest-save-state").removeClass("btn-success").addClass("btn-danger")
+
       providerName = $(this).closest("#modal").find("input[name='selected-provider']").val()
       $("#provider").attr("data-selected", providerName)
 

@@ -18,6 +18,7 @@
   <span class="component-version">
     <%= label_tag  "component_json[manifest][#{@category}][#{@instance}]version", "Version:" %>
     <%= select_tag "component_json[manifest][#{@category}][#{@instance}]version",
-                   options_for_select(@versions, selected: @versions.last) %>
+                   options_for_select(@versions, selected: @versions.last),
+                   :class => "component-version-select" %>
   </span>
 </div>

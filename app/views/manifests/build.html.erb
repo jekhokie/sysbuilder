@@ -30,7 +30,12 @@
     </div>
 
     <div class="component-container-heading-summary">
-      <h2 class="component-container-heading">Data Center Build Manifest</h2>
+      <div id="component-container-heading-container">
+        <div class="component-container-heading">Data Center Build Manifest</div>
+        <button type="button" class="btn btn-danger btn-xs" disabled="disabled" id="manifest-save-state">
+          <span class="glyphicon glyphicon-info-sign"></span> Not Saved
+        </button>
+      </div>
 
       <div class="build-options">
         <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>

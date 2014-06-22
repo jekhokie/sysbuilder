@@ -59,10 +59,36 @@
     .component-container-heading-summary {
       width: 100%;
 
-      .component-container-heading {
+      #component-container-heading-container {
         display:    inline-block;
         margin-top: 7px;
         width:      617px;
+
+        .component-container-heading {
+          display:        inline-block;
+          font-size:      30px;
+          font-weight:    500;
+          height:         33px;
+          line-height:    33px;
+          margin-top:     -7px;
+          vertical-align: middle;
+        }
+
+        #manifest-save-state {
+          border-radius:         3px;
+          -moz-border-radius:    3px;
+          -webkit-border-radius: 3px;
+
+          display:     inline-block;
+          height:      20px;
+          margin-left: 12px;
+          margin-top:  -4px;
+          width:       85px;
+
+          .glyphicon {
+            display: inline-block;
+          }
+        }
       }
 
       .build-options {
@@ -70,7 +96,7 @@
 
         #generate-build-summary-json,
         #save-manifest {
-          margin-top: -10px;
+          margin-top: -3px;
           width:      120px;
         }
       }
