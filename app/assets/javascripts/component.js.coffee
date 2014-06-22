@@ -8,8 +8,12 @@ componentReady = ->
       countElement   = $(this).closest("form").find("#" + headingDomId).find(".component-count")
       containerDomId = $(this).closest(".component-list").attr("id")
 
-      $(this).closest(".assigned-component").remove()
-      $(countElement).html $("#" + containerDomId).find(".assigned-component").size()
+      #$(this).closest(".assigned-component").remove()
+      $(this).closest(".assigned-component").slideUp ->
+        $(this).remove()
+        $(countElement).html $("#" + containerDomId).find(".assigned-component").size()
+        return
+
       return
 
 # handle turbolinks rails 4 document ready

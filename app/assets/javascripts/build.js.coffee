@@ -45,7 +45,10 @@ buildReady = ->
               # insert the element into the container
               elementId          = $(this).attr("id").replace("-heading", "").concat("-container")
               componentContainer = $(this).closest(".panel").find("#" + elementId)
-              $(componentContainer).append $(obj)[0]
+              appendObject       = $(obj).css("display", "none")
+
+              $(componentContainer).append $(appendObject)[0]
+              $(appendObject).slideDown()
 
               # update the number of components for the container type
               numComponents = $(componentContainer).find(".assigned-component").size()
