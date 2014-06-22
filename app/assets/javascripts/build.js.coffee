@@ -1,4 +1,5 @@
 buildReady = ->
+  # handle component draggable objects into the category lists
   $(".draggable").livequery ->
     $(this).draggable
       cursor:   "move"

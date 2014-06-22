@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   post 'change_provider',     to: 'manifests#change_provider'
   post 'get_provider_info',   to: 'manifests#get_provider_info'
   resource :manifests,      only: [ :new, :create ]
-  resources :manifests,     only: [ :update ]
+  resources :manifests,     only: [ :edit, :update ]
 end

@@ -20,6 +20,26 @@
 
     table#manifest-list {
       margin-left: 0px;
+
+      .manifest-vplatform,
+      .manifest-vresources {
+        text-align: center;
+      }
+
+      tbody {
+        tr {
+          td.manifest-name {
+            a {
+              color:      #000;
+              font-style: normal;
+            }
+          }
+        }
+
+        tr:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 }

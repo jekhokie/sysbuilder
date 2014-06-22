@@ -6,10 +6,8 @@ class ManifestsController < ApplicationController
 
   #vvv build actions vvv#
   def build
-    @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
-    @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
-    @compute_providers = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
-    @manifest          = Manifest.new
+    @manifest = Manifest.new
+    get_category_component_compute_lists
   end
 
   def assign
@@ -77,6 +75,13 @@ class ManifestsController < ApplicationController
     flash.discard
   end
 
+  def edit
+    get_category_component_compute_lists
+    @manifest = Manifest.find params[:id]
+
+    render :action => 'build'
+  end
+
   def update
     get_component_json_and_provider
 
@@ -103,5 +108,11 @@ class ManifestsController < ApplicationController
 
   def manifest_params
     params.require(:manifest).permit(:name, :configuration)
+  end
+
+  def get_category_component_compute_lists
+    @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
+    @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
+    @compute_providers = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
   end
 end

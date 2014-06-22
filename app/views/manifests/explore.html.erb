@@ -13,20 +13,20 @@
       <table class="table table-hover" id="manifest-list">
         <thead>
           <tr>
-            <th>Name</tr>
-            <th>Created</th>
-            <th>Last Modified</th>
-            <th>Options</th>
+            <th class="manifest-name">Name</th>
+            <th class="manifest-vplatform">Virtual Platform</th>
+            <th class="manifest-vresources"># Virtual Resources</th>
+            <th class="manifest-created">Created</th>
           </tr>
         </thead>
 
         <tbody>
           <%- @manifests.each do |manifest| %>
             <tr>
-              <td><%= manifest.name %></td>
-              <td><%= manifest.created_at %></td>
-              <td><%= manifest.updated_at %></td>
-              <td></td>
+              <td class="manifest-name"><%= link_to manifest.name, edit_manifest_path(manifest) %></td>
+              <td class="manifest-vplatform"><%= manifest.vplatform %></td>
+              <td class="manifest-vresources"><%= manifest.num_vresources %> </td>
+              <td class="manifest-created"><%= manifest.created_at.to_formatted_s(:long) %></td>
             </tr>
           <%- end %>
         </tbody>
