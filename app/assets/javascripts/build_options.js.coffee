@@ -30,9 +30,9 @@ buildOptionsReady = ->
 
       return
 
-  # handle the user opting to save the manifest they created
+  # save a new manifest that has not yet been created in the database
   # JS is required in order to gather the form data for the manifest
-  $("#save-manifest").livequery ->
+  $("#save-manifest-new").livequery ->
     $(this).click (event) ->
       event.preventDefault()
 
@@ -61,3 +61,21 @@ buildOptionsReady = ->
 # handle turbolinks rails 4 document ready
 $(document).ready(buildOptionsReady)
 $(document).on('page:load', buildOptionsReady)
+
+# update a previously-saved manifest
+@updateManifest = (updatePath) ->
+  submitForm = $("form#dc-build-form")
+
+  if $(submitForm).find(".assigned-component").size() < 1
+    alert "Please assign at least 1 component before attempting to save the manifest."
+  else
+    $.ajax updatePath,
+      context: this
+      type:    "PUT"
+      data: $(submitForm).serialize()
+      success: (response) ->
+        eval response
+      error: (response) ->
+        alert "An error has occurred - please check the server logs"
+
+    return

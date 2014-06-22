@@ -39,7 +39,7 @@
 
       <div class="build-options">
         <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
-        <button class="btn btn-primary btn-xs" id="save-manifest" data-save-path="<%= new_manifests_path %>">Save</button>
+        <%= render :partial => "manifests/update_button", :locals => { :manifest => @manifest } %>
       </div>
     </div>
 

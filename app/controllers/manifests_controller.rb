@@ -9,6 +9,7 @@ class ManifestsController < ApplicationController
     @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
     @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
     @compute_providers = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
+    @manifest          = Manifest.new
   end
 
   def assign
@@ -71,6 +72,23 @@ class ManifestsController < ApplicationController
       render
     else
       render :template => 'manifests/new_error', :formats => [ :js ]
+    end
+
+    flash.discard
+  end
+
+  def update
+    get_component_json_and_provider
+
+    @manifest               = Manifest.find params[:id]
+    @manifest.configuration = @component_json
+
+    if @manifest.save
+      flash[:notice] = "Manifest saved successfully!"
+      render
+    else
+      flash[:error] = "Manifest could not be saved - please check server logs."
+      render :template => 'manifests/update_error', :formats => [ :js ], :locals => { :manifest => @manifest }
     end
 
     flash.discard

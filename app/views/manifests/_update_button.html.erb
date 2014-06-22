@@ -1,0 +1,5 @@
+<%- if manifest.new_record? %>
+  <button class="btn btn-primary btn-xs" id="save-manifest-new" data-save-path="<%= new_manifests_path %>">Save</button>
+<%- else %>
+  <button class="btn btn-primary btn-xs" id="save-manifest-update" onclick='updateManifest("<%= manifest_path(manifest) %>");'>Save</button>
+<%- end %>
