@@ -1,11 +1,26 @@
 #modal {
   .modal-body {
+    // show manifest JSON modal
     pre {
       cursor:     text;
       max-height: 400px;
       overflow-y: scroll;
     }
 
+    // save manifest modal
+    p.save-heading {
+      font-size:     18px;
+      margin-bottom: 15px;
+    }
+
+    #save-errors {
+      color:           red;
+      font-weight:     bold;
+      list-style-type: none;
+      margin-bottom:   15px;
+    }
+
+    // provider modal
     span.provider-info-name {
       font-style:  italic;
       font-weight: bold;

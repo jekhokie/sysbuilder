@@ -1,4 +1,4 @@
-ready = ->
+buildReady = ->
   $(".draggable").livequery ->
     $(this).draggable
       cursor:   "move"
@@ -45,5 +45,5 @@ ready = ->
       i++
 
 # handle turbolinks rails 4 document ready
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(buildReady)
+$(document).on('page:load', buildReady)

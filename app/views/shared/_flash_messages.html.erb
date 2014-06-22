@@ -1,0 +1,7 @@
+<div id="flash-box">
+  <% flash.each do |key, value| %>
+    <%- unless key.to_s == 'timedout' %>
+      <%= render :partial => "shared/flash_message", :locals => { :key => key, :value => value } %>
+    <%- end %>
+  <% end %>
+</div>

@@ -31,7 +31,11 @@
 
     <div class="component-container-heading-summary">
       <h2 class="component-container-heading">Data Center Build Manifest</h2>
-      <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
+
+      <div class="build-options">
+        <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
+        <button class="btn btn-primary btn-xs" id="save-manifest" data-save-path="<%= new_manifests_path %>">Save</button>
+      </div>
     </div>
 
     <div class="panel panel-default">

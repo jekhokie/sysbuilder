@@ -1,8 +1,10 @@
 class ManifestsController < ApplicationController
+  #vvv explore actions vvv#
   def explore
     @manifests = Manifest.all
   end
 
+  #vvv build actions vvv#
   def build
     @category_list     = YAML::load(File.open(File.join(Rails.root, 'config/categories.yml')))
     @component_list    = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
@@ -45,11 +47,43 @@ class ManifestsController < ApplicationController
   end
 
   def build_summary
-    @component_json             = params[:component_json] || {}
-    @component_json["provider"] = params[:provider] unless @component_json.blank?
+    get_component_json_and_provider
 
     respond_to do |format|
       format.json { render :json => @component_json.to_json }
     end
+  end
+
+  def new
+    get_component_json_and_provider
+
+    @manifest               = Manifest.new
+    @manifest.configuration = JSON.dump @component_json
+
+    render :template => 'manifests/new', :formats => [ :html ], :layout => false
+  end
+
+  def create
+    @manifest = Manifest.new manifest_params
+
+    if @manifest.save
+      flash[:notice] = "Manifest saved successfully!"
+      render
+    else
+      render :template => 'manifests/new_error', :formats => [ :js ]
+    end
+
+    flash.discard
+  end
+
+  private
+
+  def get_component_json_and_provider
+    @component_json             = params[:component_json] || {}
+    @component_json["provider"] = params[:provider] unless @component_json.blank?
+  end
+
+  def manifest_params
+    params.require(:manifest).permit(:name, :configuration)
   end
 end

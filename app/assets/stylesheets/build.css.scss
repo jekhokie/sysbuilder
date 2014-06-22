@@ -62,12 +62,17 @@
       .component-container-heading {
         display:    inline-block;
         margin-top: 7px;
-        width:      400px;
+        width:      617px;
       }
 
-      #generate-build-summary-json {
-        margin-top: -10px;
-        width:      120px;
+      .build-options {
+        display: inline-block;
+
+        #generate-build-summary-json,
+        #save-manifest {
+          margin-top: -10px;
+          width:      120px;
+        }
       }
     }
 

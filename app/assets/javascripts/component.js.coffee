@@ -1,4 +1,4 @@
-ready = ->
+componentReady = ->
   # handle removing elements when the destroy button is clicked
   $(".component-destroy").livequery ->
     $(this).click ->
@@ -13,5 +13,5 @@ ready = ->
       return
 
 # handle turbolinks rails 4 document ready
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(componentReady)
+$(document).on('page:load', componentReady)

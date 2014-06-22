@@ -1,4 +1,4 @@
-ready = ->
+providersReady = ->
   # prompt user when they change the provider to confirm the change
   $("#provider").livequery ->
     $(this).change ->
@@ -51,5 +51,5 @@ ready = ->
       return
 
 # handle turbolinks rails 4 document ready
-$(document).ready(ready)
-$(document).on('page:load', ready)
+$(document).ready(providersReady)
+$(document).on('page:load', providersReady)

@@ -6,12 +6,12 @@
 
     <ul class="nav navbar-nav navbar-left" id="navbar-links">
       <li class="<%= 'active' if controller_name == 'manifests' and action_name == 'explore' %>">
-        <a href="<%= explore_path %>">Explore</a>
+        <a href="<%= explore_path %>" data-no-turbolink>Explore</a>
       </li>
       <li class="<%= 'active' if controller_name == 'manifests' and action_name == 'build' %>">
-        <a href="<%= build_path %>">Build</a>
+        <a href="<%= build_path %>" data-no-turbolink>Build</a>
       </li>
-      <li><a href="#" data-remote="true">Launch</a></li>
+      <li><a href="#" data-remote="true" data-no-turbolink>Launch</a></li>
     </ul>
   </div>
 </div>
