@@ -66,6 +66,12 @@ buildReady = ->
     $(this).click ->
       renderNotSaved()
 
+  # prompt the user to save changes if they attempt to navigate away with un-saved changes
+  $(window).bind "beforeunload", ->
+    if window.location.pathname.match(/^(\/build|.*\/edit)$/)
+      if $("#manifest-save-state").hasClass("btn-danger") and $("#dc-build-form").find(".assigned-component").size() > 0
+        "You have unsaved changes - are you sure you wish to navigate away?"
+
 # handle turbolinks rails 4 document ready
 $(document).ready(buildReady)
 $(document).on('page:load', buildReady)
