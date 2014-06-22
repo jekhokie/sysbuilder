@@ -16,4 +16,9 @@ class Manifest < ActiveRecord::Base
   def vplatform
     JSON.parse(self.configuration)["provider"]
   end
+
+  def get_versions_for(name)
+    component_list = YAML::load(File.open(File.join(Rails.root, 'config/components.yml')))
+    component_list.deep_fetch(name.to_sym)[:versions]
+  end
 end

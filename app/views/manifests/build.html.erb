@@ -50,10 +50,26 @@
         <%- @category_list.each do |category, attrs| %>
           <div class="panel-heading" id="<%= attrs[:category] %>-heading">
             <%= category %>
-            <span class="badge component-count">0</span>
+            <span class="badge component-count">
+              <%= @manifest_json.try(:[], attrs[:category]).try(:keys).try(:count) || 0 %>
+            </span>
           </div>
 
           <div class="component-list" id="<%= attrs[:category] %>-container">
+            <%- @manifest_json.try(:[], attrs[:category]).try(:each_with_index) do |(instance, component), i| %>
+              <%= render :partial => "manifests/component",
+                         :formats => [ :html ],
+                         :locals  => {
+                           :name              => component["name"],
+                           :category          => attrs[:category],
+                           :tag_value         => component["tag"],
+                           :instance          => i,
+                           :version           => component["version"],
+                           :versions          => @manifest.get_versions_for(component["name"]),
+                           :vresource         => component["vresource"],
+                           :compute_resources => @compute_resources
+                         } %>
+            <%- end %>
           </div>
         <%- end %>
       <%- end %>

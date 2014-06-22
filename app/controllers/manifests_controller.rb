@@ -11,20 +11,14 @@ class ManifestsController < ApplicationController
   end
 
   def assign
-    @name              = params[:name]
-    @category          = params[:category]
-    @tag               = params[:tag]
-    @instance          = params[:instance]
-    @versions          = params[:versions].split(",")
+    @name     = params[:name]
+    @category = params[:category]
+    @tag      = params[:tag]
+    @instance = params[:instance]
+    @versions = params[:versions].split(",")
+    @provider = params[:provider]
 
-    # determine available virtual resources based on the provider selected
-    provider              = params[:provider]
-    @compute_providers    = []
-    compute_provider_list = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
-
-    unless compute_provider_list.nil?
-      @compute_providers = compute_provider_list[provider.to_sym]
-    end
+    get_compute_resources
 
     render :template => 'manifests/assign', :formats => [ :html ], :layout => false
   end
@@ -76,8 +70,14 @@ class ManifestsController < ApplicationController
   end
 
   def edit
+    @manifest              = Manifest.find(params[:id])
+    manifest_configuration = JSON.parse(@manifest.configuration)
+    @manifest_json         = manifest_configuration["manifest"]
+    @provider              = manifest_configuration["provider"]
+    puts @provider.inspect
+
     get_category_component_compute_lists
-    @manifest = Manifest.find params[:id]
+    get_compute_resources
 
     render :action => 'build'
   end
@@ -86,7 +86,7 @@ class ManifestsController < ApplicationController
     get_component_json_and_provider
 
     @manifest               = Manifest.find params[:id]
-    @manifest.configuration = @component_json
+    @manifest.configuration = JSON.dump(@component_json)
 
     if @manifest.save
       flash[:notice] = "Manifest saved successfully!"
@@ -102,8 +102,18 @@ class ManifestsController < ApplicationController
   private
 
   def get_component_json_and_provider
-    @component_json             = params[:component_json] || {}
-    @component_json["provider"] = params[:provider] unless @component_json.blank?
+    @component_json             = params[:component_json] || { :manifest => {} }
+    @component_json["provider"] = params[:provider]
+  end
+
+  def get_compute_resources
+    # determine available virtual resources based on the provider selected
+    @compute_resources = []
+    compute_list       = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
+
+    unless compute_list.nil?
+      @compute_resources = compute_list[@provider.to_sym]
+    end
   end
 
   def manifest_params
