@@ -29,10 +29,11 @@
       <div class="provider">
         <%= label_tag  "virt-provider", "Virtual Provider:" %>
         <%= select_tag "virt-provider",
-                       options_for_select(@compute_providers.keys, selected: @compute_providers.keys[0]),
+                       options_for_select(@compute_providers.keys,
+                                          selected: (@manifest.vplatform || @compute_providers.keys[0])),
                        :id                 => "provider",
                        :'data-change-path' => change_provider_path,
-                       :'data-selected'    => @compute_providers.keys[0] %>
+                       :'data-selected'    => (@manifest.vplatform || @compute_providers.keys[0]) %>
 
         <button type="button"
                 class="btn btn-primary btn-xs"
