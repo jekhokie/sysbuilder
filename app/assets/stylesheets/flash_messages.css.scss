@@ -1,6 +1,13 @@
-#flash-box {
-  margin-left: 200px;
-  position:    absolute;
-  text-align:  center;
-  width:       800px;
+header {
+  position: relative;
+
+  #flash-box {
+    left:        50%;
+    margin-left: -390px;
+    position:    absolute;
+    text-align:  center;
+    top:         -16px;
+    width:       800px;
+    z-index:     10000;
+  }
 }

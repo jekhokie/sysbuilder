@@ -41,6 +41,7 @@ class ManifestsController < ApplicationController
 
   def build_summary
     get_component_json_and_provider
+    get_hourly_and_monthly_cost
 
     respond_to do |format|
       format.json { render :json => @component_json.to_json }
@@ -74,7 +75,6 @@ class ManifestsController < ApplicationController
     manifest_configuration = JSON.parse(@manifest.configuration)
     @manifest_json         = manifest_configuration["manifest"]
     @provider              = manifest_configuration["provider"]
-    puts @provider.inspect
 
     get_category_component_compute_lists
     get_compute_resources
@@ -104,6 +104,27 @@ class ManifestsController < ApplicationController
   def get_component_json_and_provider
     @component_json             = params[:component_json] || { :manifest => {} }
     @component_json["provider"] = params[:provider]
+  end
+
+  def get_hourly_and_monthly_cost
+    hourly_cost       = 0.000
+    compute_providers = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))
+
+    unless @component_json["manifest"].nil?
+      @component_json["manifest"].each do |manifest, category_attrs|
+        category_attrs.each do |component, component_attrs|
+          hourly_cost += compute_providers[params[:provider].to_sym][component_attrs["vresource"].to_sym][:cost].to_f
+        end
+      end
+    end
+
+    # calculate monthly cost based on days in this month * 24 hours per day
+    today         = Date.today
+    days_in_month = Time.days_in_month(today.month, today.year)
+    monthly_cost  = hourly_cost * days_in_month * 24.0
+
+    @component_json["hourly_cost"]  = hourly_cost
+    @component_json["monthly_cost"] = sprintf("%.4f" % monthly_cost)
   end
 
   def get_compute_resources

@@ -4,16 +4,20 @@
     :cpu:  "1"
     :mem:  "1024"
     :disk: "15"
+    :cost: "0.000 /hr"
   :medium:
     :cpu:  "2"
     :mem:  "2048"
     :disk: "25"
+    :cost: "0.000 /hr"
   :large:
     :cpu:  "4"
     :mem:  "4096"
     :disk: "40"
+    :cost: "0.000 /hr"
 :Amazon EC2:
   :t1.micro:
     :cpu:  "1"
     :mem:  "613"
     :disk: "EBS"
+    :cost: "0.020 /hr"

@@ -19,13 +19,46 @@
   #component-container {
     display:     inline-block;
     float:       left;
-    margin-top:  1px;
+    margin-top:  20px;
     margin-left: 40px;
     width:       865px;
 
+    .provider-container-heading {
+      display:     inline-block;
+      font-size:   30px;
+      font-weight: 500;
+      height:      33px;
+      line-height: 33px;
+      width:       305px;
+    }
+
+    #provider-container-heading-saved {
+      display:    inline-block;
+      margin-top: 7px;
+      width:      150px;
+
+      #manifest-save-state {
+        border-radius:         3px;
+        -moz-border-radius:    3px;
+        -webkit-border-radius: 3px;
+
+        display:     inline-block;
+        height:      20px;
+        margin-left: 12px;
+        margin-top:  -10px;
+        width:       90px;
+
+        .glyphicon {
+          display: inline-block;
+        }
+      }
+    }
+
     .provider-container {
-      text-align: right;
-      width:      100%;
+      display:        inline-block;
+      margin-top:     -10px;
+      text-align:     right;
+      vertical-align: middle;
 
       .provider {
         border-radius:         6px;
@@ -57,48 +90,20 @@
     }
 
     .component-container-heading-summary {
+      height:        35px;
       margin-bottom: 5px;
       width:         100%;
 
-      #component-container-heading-container {
-        display:    inline-block;
-        margin-top: 7px;
-        width:      617px;
-
-        .component-container-heading {
-          display:        inline-block;
-          font-size:      30px;
-          font-weight:    500;
-          height:         33px;
-          line-height:    33px;
-          margin-top:     -7px;
-          vertical-align: middle;
-        }
-
-        #manifest-save-state {
-          border-radius:         3px;
-          -moz-border-radius:    3px;
-          -webkit-border-radius: 3px;
-
-          display:     inline-block;
-          height:      20px;
-          margin-left: 12px;
-          margin-top:  -4px;
-          width:       85px;
-
-          .glyphicon {
-            display: inline-block;
-          }
-        }
-      }
-
       .build-options {
-        display: inline-block;
+        display:       inline-block;
+        text-align:    right;
+        padding-right: 5px;
+        width:         100%;
 
         #generate-build-summary-json,
         #save-manifest-new,
         #save-manifest-update {
-          margin-top: -3px;
+          margin-top: 9px;
           width:      120px;
         }
       }

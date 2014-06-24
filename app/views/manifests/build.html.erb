@@ -13,6 +13,18 @@
   </div>
 
   <div id="component-container">
+    <div class="provider-container-heading">Data Center Manifest</div>
+    <div id="provider-container-heading-saved">
+      <%- if controller_name == 'manifests' and action_name == 'edit' %>
+        <button type="button" class="btn btn-success btn-xs" disabled="disabled" id="manifest-save-state">
+          <span class="glyphicon glyphicon-ok-sign"></span> Saved
+        </button>
+      <%- else %>
+        <button type="button" class="btn btn-danger btn-xs" disabled="disabled" id="manifest-save-state">
+          <span class="glyphicon glyphicon-info-sign"></span> Not Saved
+        </button>
+      <%- end %>
+    </div>
     <div class="provider-container">
       <div class="provider">
         <%= label_tag  "virt-provider", "Virtual Provider:" %>
@@ -30,18 +42,6 @@
     </div>
 
     <div class="component-container-heading-summary">
-      <div id="component-container-heading-container">
-        <div class="component-container-heading">Data Center Build Manifest</div>
-        <%- if controller_name == 'manifests' and action_name == 'edit' %>
-          <button type="button" class="btn btn-success btn-xs" disabled="disabled" id="manifest-save-state">
-            <span class="glyphicon glyphicon-ok-sign"></span> Saved
-          </button>
-        <%- else %>
-          <button type="button" class="btn btn-danger btn-xs" disabled="disabled" id="manifest-save-state">
-            <span class="glyphicon glyphicon-info-sign"></span> Not Saved
-          </button>
-        <%- end %>
-      </div>
 
       <div class="build-options">
         <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
