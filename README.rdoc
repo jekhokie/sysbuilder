@@ -48,6 +48,7 @@ Where:
        :cpu:  "<COMPUTE_CPUS>"
        :mem:  "<COMPUTE_MEMORY>"
        :disk: "<COMPUTE_DISK>"
+       :cost: "<COMPUTE_COST_HR> /hr"
 
 Where:
 - <PROVIDER_NAME>: Name of the provider that will be interfaced with for creating the virtual instances
@@ -55,3 +56,4 @@ Where:
 - <COMPUTE_CPUS>: Number of CPUs that the compute resource will contain
 - <COMPUTE_MEMORY>: Amount of memory (in MB) that the compute resource will contain
 - <COMPUTE_DISK>: Amount of disk storage (in GB) that the compute resource will contain
+- <COMPUTE_COST_HR>: The cost of running this instance per hour

@@ -21,3 +21,23 @@
     :mem:  "613"
     :disk: "EBS"
     :cost: "0.020 /hr"
+  :c3.large:
+    :cpu:  "2"
+    :mem:  "3750"
+    :disk: "32"
+    :cost: "0.105 /hr"
+  :c3.2xlarge:
+    :cpu:  "8"
+    :mem:  "1500"
+    :disk: "160"
+    :cost: "0.420 /hr"
+  :r3.large:
+    :cpu:  "2"
+    :mem:  "15000"
+    :disk: "32"
+    :cost: "0.175 /hr"
+  :r3.8xlarge:
+    :cpu:  "32"
+    :mem:  "244000"
+    :disk: "640"
+    :cost: "2.800 /hr"
