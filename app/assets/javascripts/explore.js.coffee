@@ -1,6 +1,6 @@
 exploreReady = ->
   # allow the user to select and navigate clicking anywhere on the manifest row
-  $("#manifest-listing table tr").livequery ->
+  $("#manifest-listing table tbody tr").livequery ->
     $(this).click ->
       window.location.href = $(this).find("td.manifest-name a").attr("href")
 

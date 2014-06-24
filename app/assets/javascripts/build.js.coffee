@@ -94,6 +94,14 @@ $(document).on('page:load', buildReady)
     $(heading).html "$ " + Number(hourlyCost).toFixed(3) + " /hr"
     $("#" + category + "-category-monthly-cost").html "$ " + Number(hourlyCost * 24.0 * 30.0).toFixed(3) + " /mo"
 
-  totalMonthlyCost = Number(totalHourlyCost * 24.0 * 30.0)
-  $("#dc-cost-monthly-price").html "$" + totalMonthlyCost.toFixed(2)
-  $("#dc-cost-yearly-price").html  "$" + Number(totalMonthlyCost * 12.0).toFixed(2)
+  totalMonthlyCost = Number(totalHourlyCost * 24.0 * 30.0).toFixed(2)
+  totalYearlyCost  = Number(totalMonthlyCost * 12.0).toFixed(2)
+
+  # update the visible costs
+  $("#dc-cost-monthly-price").html "$" + totalMonthlyCost
+  $("#dc-cost-yearly-price").html  "$" + totalYearlyCost
+
+  # update the hidden input costs
+  $("input#component_json_costs_hourly").val  Number(totalHourlyCost).toFixed(2)
+  $("input#component_json_costs_monthly").val Number(totalMonthlyCost).toFixed(2)
+  $("input#component_json_costs_yearly").val  Number(totalYearlyCost).toFixed(2)

@@ -67,7 +67,10 @@
 
     <div class="panel panel-default">
       <%= form_tag(build_summary_path, method: :post, remote: true, id: "dc-build-form") do %>
-        <%= hidden_field_tag "provider", (@manifest.vplatform || @compute_providers.keys[0]) %>
+        <%= hidden_field_tag "provider",                       (@manifest.vplatform    || @compute_providers.keys[0]) %>
+        <%= hidden_field_tag "component_json[costs][hourly]",  (@manifest.hourly_cost  || "0.000") %>
+        <%= hidden_field_tag "component_json[costs][monthly]", (@manifest.monthly_cost || "0.000") %>
+        <%= hidden_field_tag "component_json[costs][yearly]",  (@manifest.yearly_cost  || "0.000") %>
 
         <%- @category_list.each do |category, attrs| %>
           <div class="panel-heading" id="<%= attrs[:category] %>-heading">

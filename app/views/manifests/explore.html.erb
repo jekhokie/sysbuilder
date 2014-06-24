@@ -15,7 +15,9 @@
           <tr>
             <th class="manifest-name">Name</th>
             <th class="manifest-vplatform">Virtual Platform</th>
-            <th class="manifest-vresources"># Virtual Resources</th>
+            <th class="manifest-vresources"># Resources</th>
+            <th class="manifest-monthly-cost">Monthly Cost</th>
+            <th class="manifest-yearly-cost">Yearly Cost</th>
             <th class="manifest-created">Created</th>
           </tr>
         </thead>
@@ -25,7 +27,9 @@
             <tr>
               <td class="manifest-name"><%= link_to manifest.name, edit_manifest_path(manifest) %></td>
               <td class="manifest-vplatform"><%= manifest.vplatform %></td>
-              <td class="manifest-vresources"><%= manifest.num_vresources %> </td>
+              <td class="manifest-vresources"><%= manifest.num_vresources %></td>
+              <td class="manifest-monthly-cost">$ <%= manifest.monthly_cost %></td>
+              <td class="manifest-yearly-cost">$ <%= manifest.yearly_cost %></td>
               <td class="manifest-created"><%= manifest.created_at.to_formatted_s(:long) %></td>
             </tr>
           <%- end %>

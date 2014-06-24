@@ -122,9 +122,10 @@ class ManifestsController < ApplicationController
     monthly_cost  = hourly_cost  * 24.0 * 30
     yearly_cost   = monthly_cost * 12.0
 
-    @component_json["hourly_cost"]  = hourly_cost
-    @component_json["monthly_cost"] = sprintf("%.4f" % monthly_cost)
-    @component_json["yearly_cost"]  = sprintf("%.4f" % yearly_cost)
+    @component_json["costs"]            = {}
+    @component_json["costs"]["hourly"]  = hourly_cost
+    @component_json["costs"]["monthly"] = sprintf("%.4f" % monthly_cost)
+    @component_json["costs"]["yearly"]  = sprintf("%.4f" % yearly_cost)
   end
 
   def get_compute_resources
