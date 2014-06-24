@@ -7,11 +7,6 @@ buildReady = ->
       helper: (event) ->
         $("<div class='dc-component'><div class='title'>" + $(this).text() + "</div>")
 
-  # change the saved state to "not saved"
-  renderNotSaved = ->
-    $("#manifest-save-state").html "<span class='glyphicon glyphicon-info-sign'></span> Not Saved"
-    $("#manifest-save-state").removeClass("btn-success").addClass("btn-danger")
-
   # build out droppable handling dynamically
   componentArray = []
   $.each $("#component-container").find(".panel-heading"), (index, value) ->
@@ -50,9 +45,13 @@ buildReady = ->
               $(componentContainer).append $(appendObject)[0]
               $(appendObject).slideDown()
 
-              # update the number of components for the container type
-              numComponents = $(componentContainer).find(".assigned-component").size()
+              # update the number and cost of components for the container type
+              totalComponents = $(componentContainer).find(".assigned-component")
+              numComponents = $(totalComponents).size()
               $(this).find(".component-count").html numComponents
+
+              # update the total cost for the container type
+              calculateCosts()
           return
       i++
 
@@ -60,18 +59,41 @@ buildReady = ->
   $("select[class='component-version-select'], select[class='provider-compute-resources']").livequery ->
     $(this).change ->
       renderNotSaved()
-
-  # ensure that any time a component is removed, the manifest is not saved
-  $("button.component-destroy").livequery ->
-    $(this).click ->
-      renderNotSaved()
+      calculateCosts()
 
   # prompt the user to save changes if they attempt to navigate away with un-saved changes
   $(window).bind "beforeunload", ->
     if window.location.pathname.match(/^(\/build|.*\/edit)$/)
       if $("#manifest-save-state").hasClass("btn-danger") and $("#dc-build-form").find(".assigned-component").size() > 0
         "You have unsaved changes - are you sure you wish to navigate away?"
+  calculateCosts()
 
 # handle turbolinks rails 4 document ready
 $(document).ready(buildReady)
 $(document).on('page:load', buildReady)
+
+# change the saved state to "not saved"
+@renderNotSaved = ->
+  $("#manifest-save-state").html "<span class='glyphicon glyphicon-info-sign'></span> Not Saved"
+  $("#manifest-save-state").removeClass("btn-success").addClass("btn-danger")
+
+# calculate and display the hourly and monthly costs per category
+# as well as the total overall provider costs per month/year
+@calculateCosts = ->
+  totalHourlyCost = 0.0
+
+  $.each $(".category-hourly-cost"), (index, heading) ->
+    hourlyCost = 0.0
+    category   = $(heading).attr("id").replace("-category-hourly-cost", "")
+
+    $.each $("#" + category + "-container").find(".assigned-component"), (index, component) ->
+      $.each $(component).find("select.provider-compute-resources option:selected"), (index, option) ->
+        hourlyCost += parseFloat($(option).attr("cost"))
+
+    totalHourlyCost += hourlyCost
+    $(heading).html "$ " + Number(hourlyCost).toFixed(3) + " /hr"
+    $("#" + category + "-category-monthly-cost").html "$ " + Number(hourlyCost * 24.0 * 30.0).toFixed(3) + " /mo"
+
+  totalMonthlyCost = Number(totalHourlyCost * 24.0 * 30.0)
+  $("#dc-cost-monthly-price").html "$" + totalMonthlyCost.toFixed(2)
+  $("#dc-cost-yearly-price").html  "$" + Number(totalMonthlyCost * 12.0).toFixed(2)

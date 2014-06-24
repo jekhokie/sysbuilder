@@ -13,18 +13,27 @@
   </div>
 
   <div id="component-container">
-    <div class="provider-container-heading">Data Center Manifest</div>
-    <div id="provider-container-heading-saved">
-      <%- if controller_name == 'manifests' and action_name == 'edit' %>
-        <button type="button" class="btn btn-success btn-xs" disabled="disabled" id="manifest-save-state">
-          <span class="glyphicon glyphicon-ok-sign"></span> Saved
-        </button>
-      <%- else %>
-        <button type="button" class="btn btn-danger btn-xs" disabled="disabled" id="manifest-save-state">
-          <span class="glyphicon glyphicon-info-sign"></span> Not Saved
-        </button>
-      <%- end %>
+    <div id="provider-options-container">
+      <div id="provider-container-heading-saved">
+        <div class="provider-container-heading">Data Center Manifest</div>
+
+        <%- if controller_name == 'manifests' and action_name == 'edit' %>
+          <button type="button" class="btn btn-success btn-xs" disabled="disabled" id="manifest-save-state">
+            <span class="glyphicon glyphicon-ok-sign"></span> Saved
+          </button>
+        <%- else %>
+          <button type="button" class="btn btn-danger btn-xs" disabled="disabled" id="manifest-save-state">
+            <span class="glyphicon glyphicon-info-sign"></span> Not Saved
+          </button>
+        <%- end %>
+      </div>
+
+      <div class="build-options">
+        <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
+        <%= render :partial => "manifests/update_button", :locals => { :manifest => @manifest } %>
+      </div>
     </div>
+
     <div class="provider-container">
       <div class="provider">
         <%= label_tag  "virt-provider", "Virtual Provider:" %>
@@ -39,27 +48,37 @@
                 class="btn btn-primary btn-xs"
                 data-info-path="<%= get_provider_info_path %>"
                 id="show-provider-specs">Specs</button>
-      </div>
-    </div>
 
-    <div class="component-container-heading-summary">
+        <div id="provider-cost-summary">
+          <div class="virtual-dc-cost">
+            <div class="dc-cost-monthly">
+              <div class="dc-cost-heading dc-cost-monthly-heading">Total $/mo: </div>
+              <div class="dc-cost-price" id="dc-cost-monthly-price"></div>
+            </div>
 
-      <div class="build-options">
-        <button class="btn btn-primary btn-xs" id="generate-build-summary-json">Summary (JSON)</button>
-        <%= render :partial => "manifests/update_button", :locals => { :manifest => @manifest } %>
+            <div class="dc-cost-yearly">
+              <div class="dc-cost-heading dc-cost-yearly-heading">Total $/yr: </div>
+              <div class="dc-cost-price" id="dc-cost-yearly-price"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="panel panel-default">
       <%= form_tag(build_summary_path, method: :post, remote: true, id: "dc-build-form") do %>
-        <%= hidden_field_tag "provider", @compute_providers.keys[0] %>
+        <%= hidden_field_tag "provider", (@manifest.vplatform || @compute_providers.keys[0]) %>
 
         <%- @category_list.each do |category, attrs| %>
           <div class="panel-heading" id="<%= attrs[:category] %>-heading">
             <%= category %>
+
             <span class="badge component-count">
               <%= @manifest_json.try(:[], attrs[:category]).try(:keys).try(:count) || 0 %>
             </span>
+
+            <span class="badge category-hourly-cost"  id="<%= attrs[:category] %>-category-hourly-cost"></span>
+            <span class="badge category-monthly-cost" id="<%= attrs[:category] %>-category-monthly-cost"></span>
           </div>
 
           <div class="component-list" id="<%= attrs[:category] %>-container">

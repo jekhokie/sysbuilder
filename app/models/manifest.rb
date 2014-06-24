@@ -14,7 +14,7 @@ class Manifest < ActiveRecord::Base
   end
 
   def vplatform
-    JSON.parse(self.configuration)["provider"]
+    self.configuration.nil? ? "" : JSON.parse(self.configuration)["provider"]
   end
 
   def get_versions_for(name)

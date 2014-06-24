@@ -19,44 +19,61 @@
   #component-container {
     display:     inline-block;
     float:       left;
-    margin-top:  20px;
+    margin-top:  15px;
     margin-left: 40px;
     width:       865px;
 
-    .provider-container-heading {
-      display:     inline-block;
-      font-size:   30px;
-      font-weight: 500;
-      height:      33px;
-      line-height: 33px;
-      width:       305px;
-    }
+    #provider-options-container {
+      display:       inline-block;
+      margin-bottom: 12px;
+      width:         460px;
 
-    #provider-container-heading-saved {
-      display:    inline-block;
-      margin-top: 7px;
-      width:      150px;
+      #provider-container-heading-saved {
+        display:    inline-block;
+        margin-top: 7px;
 
-      #manifest-save-state {
-        border-radius:         3px;
-        -moz-border-radius:    3px;
-        -webkit-border-radius: 3px;
+        .provider-container-heading {
+          display:     inline-block;
+          font-size:   30px;
+          font-weight: 500;
+          height:      33px;
+          line-height: 33px;
+          width:       305px;
+        }
 
-        display:     inline-block;
-        height:      20px;
-        margin-left: 12px;
-        margin-top:  -10px;
-        width:       90px;
+        #manifest-save-state {
+          border-radius:         3px;
+          -moz-border-radius:    3px;
+          -webkit-border-radius: 3px;
 
-        .glyphicon {
-          display: inline-block;
+          display:     inline-block;
+          height:      20px;
+          margin-left: 12px;
+          margin-top:  -10px;
+          width:       90px;
+
+          .glyphicon {
+            display: inline-block;
+          }
+        }
+      }
+
+      .build-options {
+        display: inline-block;
+        width:   500px;
+
+        #generate-build-summary-json,
+        #save-manifest-new,
+        #save-manifest-update {
+          margin-top: 9px;
+          width:      120px;
         }
       }
     }
 
     .provider-container {
       display:        inline-block;
-      margin-top:     -10px;
+      margin-top:     -25px;
       text-align:     right;
       vertical-align: middle;
 
@@ -86,25 +103,41 @@
           margin-top: -3px;
           width:      80px;
         }
-      }
-    }
 
-    .component-container-heading-summary {
-      height:        35px;
-      margin-bottom: 5px;
-      width:         100%;
+        #provider-cost-summary {
+          font-size:     12px;
+          height:        25px;
+          line-height:   25px;
+          margin-bottom: 3px;
+          margin-top:    3px;
+          width:         100%;
 
-      .build-options {
-        display:       inline-block;
-        text-align:    right;
-        padding-right: 5px;
-        width:         100%;
+          .virtual-dc-cost {
+            display:    inline-block;
+            text-align: left;
+            width:      100%;
 
-        #generate-build-summary-json,
-        #save-manifest-new,
-        #save-manifest-update {
-          margin-top: 9px;
-          width:      120px;
+            .dc-cost-monthly,
+            .dc-cost-yearly {
+              display:      inline-block;
+              padding-left: 12px;
+              width:        185px;
+
+              .dc-cost-heading {
+                display:      inline-block;
+                font-weight:  bold;
+                font-style:   italic;
+                margin-right: 6px;
+              }
+
+              .dc-cost-price {
+                color:       #428bca;
+                display:     inline-block;
+                font-size:   14px;
+                font-weight: bold;
+              }
+            }
+          }
         }
       }
     }
@@ -127,9 +160,16 @@
         font-weight:      bold;
 
         span.badge {
-          float:      right;
-          min-width:  30px;
-          text-align: center;
+          background-color: #BBB;
+          color:            #444;
+          float:            right;
+          margin-left:      6px;
+          text-align:       center;
+          width:            100px;
+        }
+
+        span.badge.component-count {
+          width: 45px;
         }
       }
 

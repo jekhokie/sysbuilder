@@ -34,6 +34,7 @@ providersReady = ->
           $.each $(".provider-compute-resources"), (index, value) ->
             $(value).empty().append $(response)
           $("#dc-build-form").find("input[name='provider']").val $("#provider").val()
+          calculateCosts()
       return
 
   # show information about provider when requested
