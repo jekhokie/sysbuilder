@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'build_summary',       to: 'manifests#build_summary'
   post 'change_provider',     to: 'manifests#change_provider'
   post 'get_provider_info',   to: 'manifests#get_provider_info'
-  resource :manifests,      only: [ :new, :create ]
+  post '/manifests/new',      to: 'manifests#new'
+  resource :manifests,      only: [ :create ]
   resources :manifests,     only: [ :edit, :update ]
 end

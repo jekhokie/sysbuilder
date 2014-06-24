@@ -43,7 +43,7 @@ buildOptionsReady = ->
       else
         $.ajax $(this).attr("data-save-path"),
           context: this
-          type:    "GET"
+          type:    "POST"
           data: $(submitForm).serialize()
           success: (response) ->
             $("#modal .modal-close").html "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"
