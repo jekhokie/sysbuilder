@@ -28,8 +28,12 @@
               <td class="manifest-name"><%= link_to manifest.name, edit_manifest_path(manifest) %></td>
               <td class="manifest-vplatform"><%= manifest.vplatform %></td>
               <td class="manifest-vresources"><%= manifest.num_vresources %></td>
-              <td class="manifest-monthly-cost">$ <%= manifest.monthly_cost %></td>
-              <td class="manifest-yearly-cost">$ <%= manifest.yearly_cost %></td>
+              <td class="manifest-monthly-cost">$ <%= number_with_precision(manifest.monthly_cost,
+                                                                            precision: 3,
+                                                                            delimiter: ',') %></td>
+              <td class="manifest-yearly-cost">$ <%= number_with_precision(manifest.yearly_cost,
+                                                                            precision: 3,
+                                                                            delimiter: ',') %></td>
               <td class="manifest-created"><%= manifest.created_at.to_formatted_s(:long) %></td>
             </tr>
           <%- end %>
