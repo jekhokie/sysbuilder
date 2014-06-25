@@ -107,7 +107,9 @@ Create an Amazon Web Services account following the instructions on the Amazon s
 
 [AWS Signup](http://aws.amazon.com/free/ "Amazon Web Services")
 
-Copy and configure the AWS configuration file based on the credentials obtained in Step 1:
+Create a keypair with a known name through the AWS Identity service. *Make sure that you download and store the private key in a secure location as this is the only time you will be able to retrieve it*.
+
+Copy and configure the AWS configuration file based on the credentials defined when signing up as well as the key information for the SSH key generated.
 
 ```bash
 cp config/aws_configs.yml.sample config/aws_configs.yml
@@ -117,13 +119,17 @@ cp config/aws_configs.yml.sample config/aws_configs.yml
 
 ```json
 :aws:
-  :access_key: "<AWS_ACCESS_KEY>"
-  :secret_key: "<AWS_SECRET_KEY>"
+  :access_key:        "<AWS_ACCESS_KEY>"
+  :secret_key:        "<AWS_SECRET_KEY>"
+  :ssh_key_name:      "<SSH_KEY_NAME>"
+  :ssh_priv_key_path: "<SSH_PRIV_KEY_PATH>"
 ```
 
 Where:<br/>
 `<AWS_ACCESS_KEY>`: Access key from the AWS signup<br/>
-`<AWS_SECRET_KEY>`: Secret key from the AWS signup
+`<AWS_SECRET_KEY>`: Secret key from the AWS signup<br/>
+`<SSH_KEY_NAME>`: Name of the SSH key generated in the AWS Identity service<br/>
+`<SSH_PRIV_KEY_PATH>`: Path (locally) to the SSH private key saved from the generation of the key-pair through the AWS Identity service
 
 ## Screenshots
 
