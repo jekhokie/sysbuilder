@@ -23,4 +23,5 @@
 config/categories.yml
 config/components.yml
 config/compute_providers.yml
+config/aws_configs.yml
 config/database.yml
