@@ -1,0 +1,25 @@
+<div id="launches-container">
+  <div id="launch-manifest-list">
+    <table class="table table-hover" id="manifest-list">
+      <thead class="header">
+        <tr>
+          <th class="manifest-name">Name</th>
+          <th class="manifest-vplatform">Virtual Platform</th>
+          <th class="manifest-vresources"># Resources</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%- @manifests.each do |manifest| %>
+          <tr>
+            <td class="manifest-name"><%= link_to manifest.name, launch_manifest_path(manifest), remote: true %></td>
+            <td class="manifest-vplatform"><%= manifest.vplatform %></td>
+            <td class="manifest-vresources"><%= manifest.num_vresources %></td>
+          </tr>
+        <%- end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="launch-status"></div>
+</div>

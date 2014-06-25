@@ -11,7 +11,9 @@
       <li class="<%= 'active' if controller_name == 'manifests' and action_name =~ /^(build|edit)$/ %>">
         <a href="<%= build_path %>" data-no-turbolink>Build</a>
       </li>
-      <li><a href="#" data-remote="true" data-no-turbolink>Launch</a></li>
+      <li class="<%= 'active' if controller_name == 'launches' %>">
+        <a href="<%= launch_path %>" data-no-turbolink>Launch</a>
+      </li>
     </ul>
   </div>
 </div>

@@ -1,0 +1,35 @@
+<div id="panel-update-container">
+  <div id="manifest-build-info">
+    <%= hidden_field_tag "provision-path", provision_manifest_path(manifest), id: "provision-path" %>
+
+    <h2>Data Center: <span class="dc-name"><%= manifest.name %></span></h2>
+
+    <div class="build-actions">
+      <button type="button" class="btn btn-sm btn-success" id="launch-dc">Launch!</button>
+    </div>
+  </div>
+
+  <div class="panel panel-default" id="instance-build-status">
+    <%- JSON.parse(manifest.configuration).try(:[], "manifest").each do |category, instances| %>
+      <div class="panel-heading" id="<%= category %>-heading">
+        <%= category %>
+      </div>
+
+      <div class="component-launch-list" id="<%= category %>-component-container">
+        <%- instances.each_with_index do |(instance_id, instance_attrs), i| %>
+          <div class="instance <%= "first-component" if i == 0 %>">
+            <div class="instance-name"><%= instance_attrs["name"] %></div>
+
+            <div class="progress-indicator progress progress-striped active inverse"
+                 id="<%= instance_id %>-<%= instance_attrs["name"] %>-progress"
+                 style="visibility: hidden; display: none;">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                Configuration Manifest (25%)
+              </div>
+            </div>
+          </div>
+        <%- end %>
+      </div>
+    <%- end %>
+  </div>
+</div>
