@@ -2,10 +2,14 @@
   <div id="manifest-build-info">
     <%= hidden_field_tag "provision-path", provision_manifest_path(manifest), id: "provision-path" %>
 
+    <div id="build-instance-channel"></div>
+
     <h2>Data Center: <span class="dc-name"><%= manifest.name %></span></h2>
 
     <div class="build-actions">
-      <button type="button" class="btn btn-sm btn-success" id="launch-dc">Launch!</button>
+      <button type="button" class="btn btn-sm btn-info" id="launch-dc">
+        <span class="progress-spinner"></span> Launch!
+      </button>
     </div>
   </div>
 
@@ -20,11 +24,11 @@
           <div class="instance <%= "first-component" if i == 0 %>">
             <div class="instance-name"><%= instance_attrs["name"] %></div>
 
-            <div class="progress-indicator progress progress-striped active inverse"
-                 id="<%= instance_id %>-<%= instance_attrs["name"] %>-progress"
+            <div class="progress-indicator progress progress-striped active"
+                 id="<%= category.gsub(/\s/, '_') %>-<%= instance_id.gsub(/\s/, '_') %>-<%= instance_attrs["name"].gsub(/\s/, '_') %>-progress"
                  style="visibility: hidden; display: none;">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                Configuration Manifest (25%)
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                (0%)
               </div>
             </div>
           </div>

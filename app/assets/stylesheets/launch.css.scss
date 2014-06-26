@@ -26,6 +26,18 @@
             margin-top:     -10px;
             vertical-align: top;
             width:          80px;
+
+            .progress-spinner {
+              display: inline-block;
+            }
+          }
+
+          button.active {
+            width: 90px;
+
+            .progress-spinner {
+              margin-left: 12px;
+            }
           }
         }
       }

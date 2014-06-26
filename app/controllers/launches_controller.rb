@@ -10,7 +10,16 @@ class LaunchesController < ApplicationController
   def provision
     get_manifest
 
-    # TODO: Kick off the data center provision based on the manifest.configuration
+    # create the build with the associated channel for this manifest
+    @build_instance         = @manifest.build_instances.new
+    @build_instance.channel = "/build_status/#{rand(1000000)}"
+    @build_instance.save
+
+    # kick of the build asynchronously
+    Thread.new do
+      Provision.start @build_instance
+      join
+    end
 
     render :formats => [ :js ]
   end

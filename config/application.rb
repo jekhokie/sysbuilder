@@ -30,5 +30,34 @@ module Sysbuilder
     # config.i18n.default_locale = :de
     #
     # Auto-require all libraries in the lib/ directory
+    config.autoload_paths << Rails.root.join('lib')
+
+    # Configure the Faye pub/sub server
+    config.middleware.delete Rack::Lock
+    config.middleware.use FayeRails::Middleware, mount: '/faye', :timeout => 25 do
+      # routing for querying the launch status
+      map '/build_status' => RealtimeBuildsController
+
+      class ServerAuth
+        def incoming(message, callback)
+          if message['channel'] !~ %r{^/meta/}
+            if message['ext']['auth_token'] != FAYE_TOKEN
+              message['error'] = 'Invalid authentication token'
+            end
+          end
+          callback.call(message)
+        end
+
+        # IMPORTANT: clear out the auth token so it is not leaked to the client
+        def outgoing(message, callback)
+          if message['ext'] && message['ext']['auth_token']
+            message['ext'] = {}
+          end
+          callback.call(message)
+        end
+      end
+
+      add_extension(ServerAuth.new)
+    end
   end
 end

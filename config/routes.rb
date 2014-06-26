@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'launch', to: 'launches#index'
   resources :manifests, only: [ ] do
     member do
-      get 'launch',     to: 'launches#launch'
+      get  'launch',    to: 'launches#launch'
       post 'provision', to: 'launches#provision'
     end
   end

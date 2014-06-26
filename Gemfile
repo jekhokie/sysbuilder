@@ -20,6 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'faye-rails'
 gem 'thin'
 
+# status indicator
+gem 'spinjs-rails'
+
 group :development do
   gem 'spring'
 end

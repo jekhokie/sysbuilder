@@ -15,6 +15,7 @@
 //= require jquery.ui.all
 //= require jquery.livequery.min
 //= require faye
+//= require jquery.spin
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
