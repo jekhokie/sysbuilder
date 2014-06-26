@@ -3,6 +3,10 @@ require 'net/http'
 module Provision
   class Builder
     def provision(build_instance)
+      # artificial delay to allow client-side JavaScript to set up Faye subscription before
+      # starting to provision and send messages (otherwise, first step is almost always missed)
+      sleep 3
+
       # set the build as in-progress
       build_instance.update active: true
 
