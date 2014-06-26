@@ -1,6 +1,8 @@
 class Manifest < ActiveRecord::Base
   serialize :configuration, JSON
 
+  has_many :build_instances, dependent: :destroy
+
   validates :name,          presence: true, uniqueness: true
   validates :configuration, presence: true
 
