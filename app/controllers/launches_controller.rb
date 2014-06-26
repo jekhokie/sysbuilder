@@ -10,10 +10,11 @@ class LaunchesController < ApplicationController
   def provision
     get_manifest
 
-    # create the build with the associated channel for this manifest
-    @build_instance         = @manifest.build_instances.new
-    @build_instance.channel = "/build_status/#{rand(1000000)}"
+    # create the build with the associated channel for this manifest - the channel
+    # is unique based on the build ID
+    @build_instance = @manifest.build_instances.new
     @build_instance.save
+    @build_instance.update channel: "/build_status/#{@build_instance.id}"
 
     # kick of the build asynchronously
     Thread.new do

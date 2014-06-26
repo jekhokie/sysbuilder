@@ -3,6 +3,10 @@
     border:     1px solid #DDDDDD;
     max-height: 200px;
     overflow-y: scroll;
+
+    table#manifest-list {
+      margin-bottom: 0px;
+    }
   }
 
   #launch-status {
