@@ -158,14 +158,20 @@ Where:<br/>
 
 ## Screenshots
 
-### Manifest Explorer
+### Explorer
 
 Main screen that shows a listing of all the created manifests (virtual data center definitions) within the system. This list can be picked from to use/provision existing manifests, and shows the associated costs for running each.
 
 ![Sysbuilder explore](img/explore.png "Manifest Explorer")
 
-### Manifest Builder
+### Builder
 
 The meat and potatoes of the Sysbuilder tool. This is where you start constructing your software mappings to virtual resource types. Make sure to pay careful attention to the numbers - your system can get more expensive than you think!
 
 ![Sysbuilder build](img/build.png "Manifest Builder")
+
+### Launcher
+
+Provision a previously-configured Manifest using the provider desired, and get realtime feedback of the progress.
+
+![Sysbuilder launch](img/launch.png "Manifest Launcher")
