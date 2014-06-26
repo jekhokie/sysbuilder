@@ -1,0 +1,4 @@
+---
+protocol: "<URL_PROTOCOL>"
+host:     "<HOST>"
+port:     "<PORT>"

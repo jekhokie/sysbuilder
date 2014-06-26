@@ -20,8 +20,12 @@
 *.swo
 
 # Ignore non-sample configuration files
+config/faye.yml
 config/categories.yml
 config/components.yml
 config/compute_providers.yml
 config/aws_configs.yml
 config/database.yml
+
+# Ignore Faye server security token
+config/initializers/faye_token.rb

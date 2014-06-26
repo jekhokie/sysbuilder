@@ -14,16 +14,41 @@ git clone git@github.com:jekhokie/sysbuilder.git
 Once cloning the project, copy the sample files:
 
 ```bash
+cp config/faye.yml.sample config/faye.yml
 cp config/categories.yml.sample config/categories.yml
 cp config/components.yml.sample config/components.yml
 cp config/compute_providers.yml.sample config/compute_providers.yml
 ```
 
+Edit the faye setting file to specify the settings for your environment.
+
+* config/faye.yml
+
+```yml
+protocol: "<URL_PROTOCOL>"
+host:     "<HOST>"
+port:     "<PORT>"
+```
+
+Where:<br/>
+`<URL_PROTOCOL>`: Protocol for the URI (http or https)<br/>
+`<HOST>`: Hostname or IP of the Rails/Faye server<br/>
+`<PORT>`: Port of the Rails/Faye server
+
+Create the Faye token and initialize to something unique.
+
+```bash
+echo "FAYE_TOKEN='<CUSTOM_FAYE_TOKEN>'" >> config/initializers/faye_token.rb
+```
+
+Where:<br/>
+`<FAYE_TOKEN>`: Unique string of letters, characters and numbers that represents a security token for the Faye pub/sub capability
+
 Edit the categories setting file to include the different categories that you wish to make available for the user to assign software to.
 
-* categories.yml
+* config/config/categories.yml
 
-```json
+```yml
 :<CATEGORY>:
   :category: "<CATEGORY_TAG>"
 ```
@@ -35,9 +60,9 @@ be configured within the <CATEGORY> field
 
 Edit the components setting file to include all the possible components that the user can assign to the various categories. Note that these components will need to be Puppet-backed for provisioning purposes. As the software is a generic container, it makes no assumptions nor does it deliver any provisioning capability specific to software solutions.
 
-* components.yml
+* config/components.yml
 
-```json
+```yml
 :<COMPONENT_CATEGORY>:
   :<COMPONENT_NAME>:
     :tag:      "<COMPONENT_TAG>"
@@ -56,9 +81,9 @@ Where:<br/>
 
 Edit the compute providers setting file to include the various provider configurations. Currently, the only two providers that are/will be supported for the foreseeable future are Vagrant (native) and Amazon Web Services using the Vagrant AWS Plugin.
 
-* compute_providers.yml
+* config/compute_providers.yml
 
-```json
+```yml
 :<PROVIDER_NAME>:
   :<COMPUTE_RESOURCE_NAME>:
     :cpu:  "<COMPUTE_CPUS>"
@@ -115,9 +140,9 @@ Copy and configure the AWS configuration file based on the credentials defined w
 cp config/aws_configs.yml.sample config/aws_configs.yml
 ```
 
-* aws_configs.yml
+* config/aws_configs.yml
 
-```json
+```yml
 :aws:
   :access_key:        "<AWS_ACCESS_KEY>"
   :secret_key:        "<AWS_SECRET_KEY>"

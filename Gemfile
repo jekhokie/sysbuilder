@@ -16,6 +16,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
 gem 'uglifier', '>= 1.3.0'
 
+# pub/sub capability
+gem 'faye-rails'
+gem 'thin'
+
 group :development do
   gem 'spring'
 end
