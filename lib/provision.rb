@@ -59,8 +59,9 @@ module Provision
           thread_message[:data] = update_progress_javascript(element_id, "Launch...", 66)
           Net::HTTP.post_form(uri, :message => thread_message.to_json)
 
-          # TODO: IMPLEMENT LAUNCH OF AWS INSTANCE
+          # TODO: IMPLEMENT LAUNCH OF INSTANCE
           unless true
+          ####################################
             build_success = false
 
             thread_message[:data]  = show_instance_error_javascript(element_id, build_instance.channel)
@@ -99,6 +100,43 @@ module Provision
 
     private
 
+    # create the required vagrant file based on the provider
+    def create_manifest(build)
+      host_list     = {}
+      num_instances = 0
+      id_tag        = "#{build.id}-ABC"
+
+      # build the hash for constructing the Vagrant file
+      JSON.parse(build.configuration)["manifest"].each do |category, category_attrs|
+        category_attrs.each do |instance, instance_attrs|
+          instance_id               = "#{build.id}-#{category.gsub(' ', '_')}-#{instance.to_s}-#{instance_attrs["name"].gsub(' ', '_')}"
+          host_list[num_instances]  = { "instance_id" => instance_id, "vresource" => instance_attrs["vresource"] }
+          num_instances            += 1
+        end
+      end
+
+      # determine parameters based on the platform/provider
+      if build.vplatform == "Amazon EC2"
+        aws_settings = YAML::load(File.open(File.join(Rails.root, 'config/aws_configs.yml')))[:aws]
+        vagrant_file = File.join(Rails.root, 'lib/templates/aws_vagrantfile.erb')
+      elsif build.vplatform == "Vagrant"
+        vbox_settings = YAML::load(File.open(File.join(Rails.root, 'config/compute_providers.yml')))[:Vagrant]
+        vagrant_file  = File.join(Rails.root, 'lib/templates/virtualbox_vagrantfile.erb')
+      else
+        return false
+      end
+
+      # construct the build directory
+      build_dir = "tmp/builds/#{build.id}"
+      Dir.mkdir(build_dir, 0750) unless Dir.exists?(build_dir)
+
+      # construct the Vagrantfile
+      erb_template = ERB.new(File.read(vagrant_file))
+      File.open(File.join(Rails.root, build_dir, "Vagrantfile"), "w") { |f| f.write erb_template.result(binding) }
+
+      return true
+    end
+
     # update the progress bars for build status
     def update_progress_javascript(element_id, status, percent_complete)
       update_js = "$('##{element_id}-progress .progress-bar').css('width', '#{percent_complete}%').html('#{status} (#{percent_complete}%)');"
@@ -134,41 +172,6 @@ module Provision
       error_js += "$('#launch-dc').removeClass('btn-info').addClass('btn-danger');"
       error_js += "$('#launch-dc').html('<span class=\"glyphicon glyphicon-remove\"></span> Error!');"
       error_js
-    end
-
-    # create the required vagrant file based on the provider
-    def create_manifest(build)
-      host_list     = {}
-      num_instances = 0
-      id_tag        = "#{build.id}-ABC"
-
-      # build the hash for constructing the Vagrant file
-      JSON.parse(build.configuration)["manifest"].each do |category, category_attrs|
-        category_attrs.each do |instance, instance_attrs|
-          instance_id               = "#{build.id}-#{category.gsub(' ', '_')}-#{instance.to_s}-#{instance_attrs["name"].gsub(' ', '_')}"
-          host_list[num_instances]  = { "instance_id" => instance_id }
-          num_instances            += 1
-        end
-      end
-
-      # determine parameters based on the platform/provider
-      if build.vplatform == "Amazon EC2"
-        aws_settings = YAML::load(File.open(File.join(Rails.root, 'config/aws_configs.yml')))[:aws]
-        vagrant_file = File.join(Rails.root, 'lib/templates/aws_vagrantfile.erb')
-      elsif build.vplatform == "Vagrant"
-      else
-        return false
-      end
-
-      # construct the build directory
-      build_dir = "tmp/builds/#{build.id}"
-      Dir.mkdir(build_dir, 0750) unless Dir.exists?(build_dir)
-
-      # construct the Vagrantfile
-      erb_template = ERB.new(File.read(vagrant_file))
-      File.open(File.join(Rails.root, build_dir, "Vagrantfile"), "w") { |f| f.write erb_template.result(binding) }
-
-      return true
     end
   end
 
