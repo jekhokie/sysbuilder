@@ -146,6 +146,8 @@ cp config/aws_configs.yml.sample config/aws_configs.yml
 :aws:
   :access_key:        "<AWS_ACCESS_KEY>"
   :secret_key:        "<AWS_SECRET_KEY>"
+  :default_region:    "<AWS_DEFAULT_REGION>"
+  :ssh_username:      "<SSH_LOGIN_USERNAME>"
   :ssh_key_name:      "<SSH_KEY_NAME>"
   :ssh_priv_key_path: "<SSH_PRIV_KEY_PATH>"
 ```
@@ -153,6 +155,8 @@ cp config/aws_configs.yml.sample config/aws_configs.yml
 Where:<br/>
 `<AWS_ACCESS_KEY>`: Access key from the AWS signup<br/>
 `<AWS_SECRET_KEY>`: Secret key from the AWS signup<br/>
+`<SSH_LOGIN_USERNAME>`: The default login user for an EC2 instance (usually ec2-user for RHEL systems)
+`<AWS_DEFAULT_REGION>`: Default region where the AMIs come from
 `<SSH_KEY_NAME>`: Name of the SSH key generated in the AWS Identity service<br/>
 `<SSH_PRIV_KEY_PATH>`: Path (locally) to the SSH private key saved from the generation of the key-pair through the AWS Identity service
 

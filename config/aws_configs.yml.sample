@@ -2,5 +2,7 @@
 :aws:
   :access_key:        "<AWS_ACCESS_KEY>"
   :secret_key:        "<AWS_SECRET_KEY>"
+  :default_region:    "<AWS_DEFAULT_REGION>"
+  :ssh_username:      "<SSH_LOGIN_USERNAME>"
   :ssh_key_name:      "<SSH_KEY_NAME>"
   :ssh_priv_key_path: "<SSH_PRIV_KEY_PATH>"
