@@ -1,18 +1,26 @@
+# -*- mode: ruby -*-
+# # vi: set ft=ruby :
+#
 # Tag Format to Identify Virtual Resource:
 #
 # [BUILD_ID]-[CATEGORY]-[INSTANCE_NUMBER]-[SOFTWARE_NAME]
 #
-Vagrant.configure("2") do |config|
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   <% host_list.each do |instance_number, instance_attrs| %>
-  config.vm.define :aws-vm<%= instance_number.to_s %> do |aws|
-    aws.vm.box = "dummy"
+  config.vm.define "aws-vm<%= instance_number.to_s %>" do |aws|
+    aws.vm.box     = "dummy"
+    aws.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
 
     aws.vm.provider :aws do |aws, override|
       aws.access_key_id     = "<%= aws_settings[:access_key] %>"
       aws.secret_access_key = "<%= aws_settings[:secret_key] %>"
       aws.keypair_name      = "<%= aws_settings[:ssh_key_name] %>"
       aws.region            = "<%= aws_settings[:default_region] %>"
-      aws.instance_type     = "m1.large"
+      aws.ami               = "<%= aws_settings[:default_ami] %>"
+      aws.instance_type     = "<%= host_list[instance_number]["vresource"] %>"
       aws.tags              = { "ID" => "<%= host_list[instance_number]["instance_id"] %>"}
 
       override.ssh.username         = "<%= aws_settings[:ssh_username] %>"

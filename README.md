@@ -104,7 +104,7 @@ Where:<br/>
 
 Start the Rails server:
 
-```
+```bash
 rails s
 ```
 
@@ -120,9 +120,15 @@ vagrant plugin install vagrant-aws
 vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
 ```
 
-### Vagrant Provider
+### Vagrant Default Provider (VirtualBox)
 
-There are no special requirements for Vagrant to function as a provider for the virtual data center. Simply installing the application following the instructions above suffices.
+Download and run the VirtualBox software installer for your operating system:
+
+```bash
+http://download.virtualbox.org/virtualbox/4.3.12/VirtualBox-4.3.12-93733-Linux_amd64.run
+chmod 775 VirtualBox-4.3.12-93733-Linux_amd64.run
+./VirtualBox-4.3.12-93733-Linux_amd64.run
+```
 
 ### Amazon Web Services (AWS) Provider
 
@@ -133,6 +139,8 @@ Create an Amazon Web Services account following the instructions on the Amazon s
 [AWS Signup](http://aws.amazon.com/free/ "Amazon Web Services")
 
 Create a keypair with a known name through the AWS Identity service. *Make sure that you download and store the private key in a secure location as this is the only time you will be able to retrieve it*.
+
+Modify the "default" security group to include SSH access from any/all sources that you wish to SSH from, to include (at a minimum) the source IP of the server/VM on which the Vagrant process will be spawned from (in most cases, the location where the Sysbuilder application is running).
 
 Copy and configure the AWS configuration file based on the credentials defined when signing up as well as the key information for the SSH key generated.
 
@@ -147,6 +155,7 @@ cp config/aws_configs.yml.sample config/aws_configs.yml
   :access_key:        "<AWS_ACCESS_KEY>"
   :secret_key:        "<AWS_SECRET_KEY>"
   :default_region:    "<AWS_DEFAULT_REGION>"
+  :default_ami:       "<AWS_DEFAULT_AMI>"
   :ssh_username:      "<SSH_LOGIN_USERNAME>"
   :ssh_key_name:      "<SSH_KEY_NAME>"
   :ssh_priv_key_path: "<SSH_PRIV_KEY_PATH>"
@@ -155,8 +164,9 @@ cp config/aws_configs.yml.sample config/aws_configs.yml
 Where:<br/>
 `<AWS_ACCESS_KEY>`: Access key from the AWS signup<br/>
 `<AWS_SECRET_KEY>`: Secret key from the AWS signup<br/>
-`<SSH_LOGIN_USERNAME>`: The default login user for an EC2 instance (usually ec2-user for RHEL systems)
 `<AWS_DEFAULT_REGION>`: Default region where the AMIs come from
+`<AWS_DEFAULT_AMI>`: Name of a the default AMI to use for building the instances (i.e. "ami-8d756fe4" for RHEL 6.5, 64-bit)
+`<SSH_LOGIN_USERNAME>`: The default login user for an EC2 instance (usually ec2-user for RHEL systems)
 `<SSH_KEY_NAME>`: Name of the SSH key generated in the AWS Identity service<br/>
 `<SSH_PRIV_KEY_PATH>`: Path (locally) to the SSH private key saved from the generation of the key-pair through the AWS Identity service
 
