@@ -18,7 +18,7 @@ class LaunchesController < ApplicationController
 
     # kick of the build asynchronously
     Thread.new do
-      Provision.start @build_instance
+      VirtualEnv.new @build_instance
       join
     end
 
