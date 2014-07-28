@@ -126,7 +126,7 @@ module VirtualEnv
     builder = Builder.new build_instance
 
     begin
-      builder.create_environment
+      builder.delay.create_environment
     rescue Exception => e
       builder.view_handler.publish ViewHandler.full_error_js
       Rails.logger.error "Received error while provisioning environment:\n#{e.message}"
