@@ -16,11 +16,7 @@ class LaunchesController < ApplicationController
     @build_instance.save
     @build_instance.update channel: "/build_status/#{@build_instance.id}"
 
-    # kick of the build asynchronously
-    Thread.new do
-      VirtualEnv.new @build_instance
-      join
-    end
+    VirtualEnv.new @build_instance
 
     render :formats => [ :js ]
   end

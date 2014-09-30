@@ -189,3 +189,12 @@ The meat and potatoes of the Sysbuilder tool. This is where you start constructi
 Provision a previously-configured Manifest using the provider desired, and get realtime feedback of the progress.
 
 ![Sysbuilder launch](img/launch.png "Manifest Launcher")
+
+
+### Delayed Job
+
+Start worker/background builder:
+
+```
+RAILS_ENV=<whatever> ./bin/delayed_job status
+```
